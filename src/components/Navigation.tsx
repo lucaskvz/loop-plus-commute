@@ -67,12 +67,6 @@ export const Navigation = () => {
               <Button variant="outline" size="sm" className="text-xs sm:text-sm" onClick={resetOnboarding} disabled={loading}>
                 Switch profile
               </Button>
-              <Button variant="ghost" size="sm" asChild className="text-xs sm:text-sm">
-                <Link to="/rides">Find a ride</Link>
-              </Button>
-              <Button variant="hero" size="sm" asChild>
-                <Link to="/offer">Offer a ride</Link>
-              </Button>
             </div>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import { ArrowRight, Users, Leaf, Shield } from "lucide-react";
 import heroImage from "@/assets/hero-carpooling.jpg";
 
@@ -19,22 +20,19 @@ export const Hero = () => {
             <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
               Commute Better,{" "}
               <span className="bg-gradient-primary bg-clip-text text-transparent">
-                Together
+                Together.
               </span>
             </h1>
             
             <p className="text-xl text-muted-foreground max-w-xl">
-              Connect with trusted colleagues for safe, affordable, and eco-friendly carpooling. 
-              Save money, reduce emissions, and build community—all in one platform.
+              Connect with trusted colleagues for safe, affordable, and eco-friendly carpooling — all in one platform.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="hero" size="lg" className="group">
-                Get Started
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-              <Button variant="outline" size="lg">
-                Learn More
+              <Button variant="hero" size="lg" className="group" asChild>
+                <Link to="/rides">
+                  Get Started →
+                </Link>
               </Button>
             </div>
 
