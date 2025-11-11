@@ -2,6 +2,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useUser } from "@/context/UserContext";
 import { Car } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const Navigation = () => {
   const { profile, resetOnboarding, loading } = useUser();
@@ -65,6 +66,9 @@ export const Navigation = () => {
               </Avatar>
               <Button variant="outline" size="sm" className="text-xs sm:text-sm" onClick={resetOnboarding} disabled={loading}>
                 Switch profile
+              </Button>
+              <Button variant="hero" size="sm" asChild>
+                <Link to="/offer">Offer a ride</Link>
               </Button>
             </div>
           </div>
