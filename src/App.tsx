@@ -7,6 +7,7 @@ import { Onboarding } from "@/components/Onboarding";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import OfferRide from "./pages/OfferRide";
+import RideDiscovery from "./pages/RideDiscovery";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +21,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/offer" element={<OfferRide />} />
+          <Route path="/rides" element={<RideDiscovery />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

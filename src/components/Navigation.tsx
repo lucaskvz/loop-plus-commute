@@ -39,14 +39,14 @@ export const Navigation = () => {
             </div>
 
             {/* Navigation Links */}
-            <div className="hidden md:flex items-center gap-8">
-              <a href="#features" className="text-sm font-medium hover:text-primary transition-colors">
-                Features
-              </a>
-              <a href="#how-it-works" className="text-sm font-medium hover:text-primary transition-colors">
-                How It Works
-              </a>
-              <a href="#about" className="text-sm font-medium hover:text-primary transition-colors">
+            <div className="hidden md:flex items-center gap-4">
+              <Link to="/rides" className="rounded-md px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary">
+                Discover rides
+              </Link>
+              <Link to="/offer" className="rounded-md px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary">
+                Offer a ride
+              </Link>
+              <a href="#about" className="rounded-md px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary">
                 About
               </a>
             </div>
@@ -66,6 +66,9 @@ export const Navigation = () => {
               </Avatar>
               <Button variant="outline" size="sm" className="text-xs sm:text-sm" onClick={resetOnboarding} disabled={loading}>
                 Switch profile
+              </Button>
+              <Button variant="ghost" size="sm" asChild className="text-xs sm:text-sm">
+                <Link to="/rides">Find a ride</Link>
               </Button>
               <Button variant="hero" size="sm" asChild>
                 <Link to="/offer">Offer a ride</Link>

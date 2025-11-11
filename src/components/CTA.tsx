@@ -38,8 +38,8 @@ export const CTA = () => {
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </Button>
-                <Button variant="outline" size="lg">
-                  Schedule a Demo
+                <Button variant="outline" size="lg" asChild>
+                  <Link to="/rides">Find a Ride</Link>
                 </Button>
               </div>
               
