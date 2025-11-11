@@ -5,6 +5,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Onboarding } from "@/components/Onboarding";
 import { SmartSuggestion } from "@/components/SmartSuggestion";
+import { ChatOverlay } from "@/components/ChatOverlay";
+import { ChatFloatingButton } from "@/components/ChatFloatingButton";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import OfferRide from "./pages/OfferRide";
@@ -20,6 +22,8 @@ const App = () => (
       <Onboarding />
       <SmartSuggestion />
       <BrowserRouter>
+        <ChatOverlay />
+        <ChatFloatingButton />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/offer" element={<OfferRide />} />

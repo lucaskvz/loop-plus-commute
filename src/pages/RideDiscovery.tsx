@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/components/ui/use-toast";
 import { cn } from "@/lib/utils";
 import { useUser } from "@/context/UserContext";
+import { useChat } from "@/context/ChatContext";
 import { ACTIVE_RIDES, type Ride } from "@/data/rides";
 
 type Filter = "all" | "same-company" | "women" | "earliest";
@@ -30,6 +31,7 @@ export const RideDiscovery = () => {
   const { toast } = useToast();
   const [filter, setFilter] = useState<Filter>("all");
   const [joinedRideIds, setJoinedRideIds] = useState<Set<string>>(new Set());
+  const { openThreadForRide } = useChat();
 
   const filteredRides = useMemo(() => {
     let rides = [...ACTIVE_RIDES];
@@ -62,6 +64,18 @@ export const RideDiscovery = () => {
       title: "Ride joined!",
       description: `We shared your profile with ${ride.driverName}. Check your dashboard for the next steps.`,
     });
+    openThreadForRide(
+      {
+        rideId: ride.id,
+        origin: ride.origin,
+        destination: ride.destination,
+        departure: ride.departure,
+        driverName: ride.driverName,
+        partnerName: ride.driverName,
+        role: "passenger",
+      },
+      { initialMessage: "Welcome aboard! Feel free to sync final details here." },
+    );
   };
 
   return (
