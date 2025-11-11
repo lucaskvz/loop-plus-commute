@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Onboarding } from "@/components/Onboarding";
+import { SmartSuggestion } from "@/components/SmartSuggestion";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import OfferRide from "./pages/OfferRide";
@@ -17,6 +18,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <Onboarding />
+      <SmartSuggestion />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
