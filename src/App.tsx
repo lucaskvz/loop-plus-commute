@@ -19,9 +19,9 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <Onboarding />
-      <SmartSuggestion />
       <BrowserRouter>
+        <Onboarding />
+        <SmartSuggestion />
         <ChatOverlay />
         <ChatFloatingButton />
         <Routes>
