@@ -7,8 +7,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
-import { useChat } from "@/context/ChatContext";
-import { useUser } from "@/context/UserContext";
 
 const RIDE_STORAGE_KEY = "loopPlus:lastRide";
 
@@ -25,9 +23,6 @@ const defaultRide: RideDraft = {
   departure: "",
   seats: 2,
 };
-
-const createId = () =>
-  typeof crypto !== "undefined" && "randomUUID" in crypto ? crypto.randomUUID() : Math.random().toString(36).slice(2);
 
 const readStoredRide = (): RideDraft => {
   if (typeof window === "undefined") return defaultRide;
@@ -94,9 +89,6 @@ export const OfferRide = () => {
   const [step, setStep] = useState(0);
   const [confirmed, setConfirmed] = useState(false);
   const [touchedSteps, setTouchedSteps] = useState<Set<number>>(new Set());
-  const [rideId, setRideId] = useState(() => createId());
-  const { profile } = useUser();
-  const { openThreadForRide } = useChat();
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -136,23 +128,7 @@ export const OfferRide = () => {
       return;
     }
 
-    const departure = ride.departure || new Date().toISOString();
-    setRide((prev) => ({ ...prev, departure }));
     setConfirmed(true);
-    openThreadForRide(
-      {
-        rideId,
-        origin: ride.origin,
-        destination: ride.destination,
-        departure,
-        driverName: profile?.displayName ?? "You",
-        partnerName: "Alex (Loop+ passenger)",
-        role: "driver",
-      },
-      {
-        initialMessage: "Hi there! Happy to coordinate pickup details here.",
-      },
-    );
   };
 
   const handleBack = () => {
@@ -171,7 +147,6 @@ export const OfferRide = () => {
   const resetRide = () => {
     setConfirmed(false);
     setStep(0);
-    setRideId(createId());
   };
 
   const renderStepContent = () => {
