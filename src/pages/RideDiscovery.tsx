@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft, Flame, MapPin, Navigation, Search, Users } from "lucide-react";
+import { ChevronLeft, Flame, MapPin, Navigation as NavIcon, Search, Users } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,6 +8,8 @@ import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/components/ui/use-toast";
 import { cn } from "@/lib/utils";
 import { useUser } from "@/context/UserContext";
+import { useChat } from "@/context/ChatContext";
+import { Navigation } from "@/components/Navigation";
 
 type Ride = {
   id: string;
@@ -105,6 +107,7 @@ export const RideDiscovery = () => {
   const navigate = useNavigate();
   const { profile } = useUser();
   const { toast } = useToast();
+  const { openThreadForRide } = useChat();
   const [filter, setFilter] = useState<Filter>("all");
   const [joinedRideIds, setJoinedRideIds] = useState<Set<string>>(new Set());
 
@@ -137,16 +140,30 @@ export const RideDiscovery = () => {
     });
     toast({
       title: "Ride joined!",
-      description: `We shared your profile with ${ride.driverName}. Check your dashboard for the next steps.`,
+      description: `We shared your profile with ${ride.driverName}. Opening chat to coordinate details.`,
     });
+    // Auto-open chat with driver
+    openThreadForRide(
+      {
+        rideId: ride.id,
+        origin: ride.origin,
+        destination: ride.destination,
+        departure: ride.departure,
+        driverName: ride.driverName,
+        partnerName: ride.driverName,
+        role: "passenger",
+      },
+      { initialMessage: "Hi! I'd like to join your ride. Let's coordinate pickup details." }
+    );
   };
 
   return (
     <section className="min-h-screen bg-gradient-to-b from-background via-background to-primary/5">
-      <div className="container mx-auto px-4 py-24">
-        <Button variant="ghost" className="mb-6" onClick={() => navigate("/")}>
+      <Navigation />
+      <div className="container mx-auto px-4 py-24 pt-32">
+        <Button variant="ghost" className="mb-6" onClick={() => navigate("/choose-mode")}>
           <ChevronLeft className="h-4 w-4 mr-2" />
-          Back to Landing
+          Back
         </Button>
         <header className="mb-10 flex flex-col gap-6 text-center sm:text-left sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-3">
@@ -201,7 +218,7 @@ export const RideDiscovery = () => {
                       </CardDescription>
                     </div>
                     <Badge variant="outline" className="flex items-center gap-1 text-xs">
-                      <Navigation className="h-3 w-3" />
+                      <NavIcon className="h-3 w-3" />
                       {ride.distanceFromYouKm.toFixed(1)} km
                     </Badge>
                   </div>

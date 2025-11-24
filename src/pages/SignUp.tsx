@@ -81,7 +81,7 @@ export const SignUp = () => {
           <CardHeader className="space-y-4">
             <CardTitle className="text-2xl">Welcome to Loop+ by Renault</CardTitle>
             <CardDescription>
-              Get started in seconds. No email verification required for MVP.
+              Find or share rides with trusted coworkers — no account setup needed for now.
             </CardDescription>
             <div className="rounded-lg border border-dashed border-primary/40 bg-primary/10 px-4 py-2 text-xs font-medium text-primary">
               Verification will be added later for corporate pilots.
