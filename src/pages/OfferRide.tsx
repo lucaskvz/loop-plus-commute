@@ -229,9 +229,9 @@ export const OfferRide = () => {
     return (
       <section className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
         <div className="container mx-auto px-4 py-24">
-          <Button variant="ghost" className="mb-6" onClick={() => navigate("/choose-mode")}>
+          <Button variant="ghost" className="mb-6" onClick={() => navigate("/")}>
             <ChevronLeft className="h-4 w-4 mr-2" />
-            Back to Choose Mode
+            Back to Landing
           </Button>
           <Card className="max-w-3xl mx-auto border-2 border-success/30 shadow-xl">
             <CardHeader className="space-y-2 text-center">
@@ -297,9 +297,9 @@ export const OfferRide = () => {
       <div className="container mx-auto px-4 py-24">
         <div className="max-w-3xl mx-auto">
           <div className="mb-6 flex items-center gap-2 text-sm text-muted-foreground">
-            <Button variant="ghost" size="sm" onClick={() => navigate("/choose-mode")}>
+            <Button variant="ghost" size="sm" onClick={() => navigate("/")}>
               <ChevronLeft className="h-4 w-4 mr-2" />
-              Back
+              Back to Landing
             </Button>
             <span className="uppercase tracking-wide text-xs">Offer a ride</span>
           </div>

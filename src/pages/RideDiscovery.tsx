@@ -144,9 +144,9 @@ export const RideDiscovery = () => {
   return (
     <section className="min-h-screen bg-gradient-to-b from-background via-background to-primary/5">
       <div className="container mx-auto px-4 py-24">
-        <Button variant="ghost" className="mb-6" onClick={() => navigate("/choose-mode")}>
+        <Button variant="ghost" className="mb-6" onClick={() => navigate("/")}>
           <ChevronLeft className="h-4 w-4 mr-2" />
-          Back to Choose Mode
+          Back to Landing
         </Button>
         <header className="mb-10 flex flex-col gap-6 text-center sm:text-left sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-3">
