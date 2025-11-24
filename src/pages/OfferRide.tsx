@@ -342,8 +342,12 @@ export const OfferRide = () => {
                   <span>Shared rides cut parking demand and expenses for everyone.</span>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-2">
-                  <Button type="button" variant="ghost" disabled={step === 0} onClick={handleBack}>
-                    Back
+                  <Button 
+                    type="button" 
+                    variant="ghost" 
+                    onClick={step === 0 ? () => navigate("/") : handleBack}
+                  >
+                    {step === 0 ? "Back to Landing" : "Back"}
                   </Button>
                   <Button type="submit" disabled={!canAdvance} className="min-w-[140px]">
                     {step === steps.length - 1 ? "Publish ride" : "Next"}
