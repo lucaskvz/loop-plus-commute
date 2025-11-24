@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
-import { Flame, MapPin, Navigation, Search, Users } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { ChevronLeft, Flame, MapPin, Navigation, Search, Users } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -101,6 +102,7 @@ const friendlyDeparture = (departure: string) =>
   });
 
 export const RideDiscovery = () => {
+  const navigate = useNavigate();
   const { profile } = useUser();
   const { toast } = useToast();
   const [filter, setFilter] = useState<Filter>("all");
@@ -142,6 +144,10 @@ export const RideDiscovery = () => {
   return (
     <section className="min-h-screen bg-gradient-to-b from-background via-background to-primary/5">
       <div className="container mx-auto px-4 py-24">
+        <Button variant="ghost" className="mb-6" onClick={() => navigate("/choose-mode")}>
+          <ChevronLeft className="h-4 w-4 mr-2" />
+          Back to Choose Mode
+        </Button>
         <header className="mb-10 flex flex-col gap-6 text-center sm:text-left sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-3">
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-primary">

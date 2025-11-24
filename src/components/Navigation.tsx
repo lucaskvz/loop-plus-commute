@@ -1,11 +1,14 @@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useUser } from "@/context/UserContext";
-import { Car } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useChat } from "@/context/ChatContext";
+import { Car, MessageCircle } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
 export const Navigation = () => {
   const { profile, resetOnboarding, loading } = useUser();
+  const { openOverlay } = useChat();
+  const location = useLocation();
 
   const initials =
     profile?.displayName
@@ -26,7 +29,7 @@ export const Navigation = () => {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <div className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2">
               <div className="w-10 h-10 rounded-xl bg-gradient-primary flex items-center justify-center shadow-primary">
                 <Car className="w-6 h-6 text-primary-foreground" />
               </div>
@@ -36,43 +39,63 @@ export const Navigation = () => {
                 </h1>
                 <p className="text-xs text-muted-foreground leading-none">by Renault</p>
               </div>
-            </div>
+            </Link>
 
             {/* Navigation Links */}
             <div className="hidden md:flex items-center gap-4">
-              <Link to="/rides" className="rounded-md px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary">
-                Discover rides
-              </Link>
-              <Link to="/offer" className="rounded-md px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary">
-                Offer a ride
-              </Link>
+              {profile && (
+                <>
+                  <Link to="/rides" className="rounded-md px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary">
+                    Discover rides
+                  </Link>
+                  <Link to="/offer" className="rounded-md px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary">
+                    Offer a ride
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={() => openOverlay(location.pathname + location.search)}
+                    className="flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
+                  >
+                    <MessageCircle className="h-4 w-4" />
+                    Chat
+                  </button>
+                </>
+              )}
+              <a href="#features" className="rounded-md px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary">
+                Features
+              </a>
+              <a href="#how-it-works" className="rounded-md px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary">
+                How It Works
+              </a>
               <a href="#about" className="rounded-md px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary">
                 About
               </a>
             </div>
 
-            {/* User identity */}
+            {/* User identity / CTA */}
             <div className="flex items-center gap-3">
-              <div className="hidden sm:flex flex-col items-end">
-                <span className="text-sm font-medium leading-tight">
-                  {profile?.displayName ?? "Guest"}
-                </span>
-                <span className="text-xs text-muted-foreground">
-                  {profile?.company ?? "Guest access"}
-                </span>
-              </div>
-              <Avatar className="h-9 w-9 border border-border/70 bg-muted/70">
-                <AvatarFallback className="text-xs font-semibold">{initials}</AvatarFallback>
-              </Avatar>
-              <Button variant="outline" size="sm" className="text-xs sm:text-sm" onClick={resetOnboarding} disabled={loading}>
-                Switch profile
-              </Button>
-              <Button variant="ghost" size="sm" asChild className="text-xs sm:text-sm">
-                <Link to="/rides">Find a ride</Link>
-              </Button>
-              <Button variant="hero" size="sm" asChild>
-                <Link to="/offer">Offer a ride</Link>
-              </Button>
+              {profile ? (
+                <>
+                  <div className="hidden sm:flex flex-col items-end">
+                    <span className="text-sm font-medium leading-tight">
+                      {profile.displayName}
+                    </span>
+                    <span className="text-xs text-muted-foreground">
+                      {profile.company ?? "Guest access"}
+                    </span>
+                  </div>
+                  <Avatar className="h-9 w-9 border border-border/70 bg-muted/70">
+                    <AvatarFallback className="text-xs font-semibold">{initials}</AvatarFallback>
+                  </Avatar>
+                  <Button variant="outline" size="sm" className="text-xs sm:text-sm" onClick={resetOnboarding} disabled={loading}>
+                    Switch profile
+                  </Button>
+                </>
+              ) : (
+                <Button variant="hero" size="sm" asChild>
+                  <Link to="/signup">Get Started</Link>
+                </Button>
+              )}
             </div>
           </div>
         </div>

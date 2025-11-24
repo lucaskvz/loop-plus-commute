@@ -33,13 +33,13 @@ export const CTA = () => {
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
                 <Button variant="hero" size="lg" className="group" asChild>
-                  <Link to="/offer">
-                  Get Started Now
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <Link to="/signup">
+                    Get Started Now
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </Button>
                 <Button variant="outline" size="lg" asChild>
-                  <Link to="/rides">Find a Ride</Link>
+                  <a href="#how-it-works">Learn More</a>
                 </Button>
               </div>
               

@@ -1,4 +1,5 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { CalendarClock, CheckCircle2, ChevronLeft, MapPin, Route, Users } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -85,6 +86,7 @@ const steps = [
 ];
 
 export const OfferRide = () => {
+  const navigate = useNavigate();
   const [ride, setRide] = useState<RideDraft>(() => readStoredRide());
   const [step, setStep] = useState(0);
   const [confirmed, setConfirmed] = useState(false);
@@ -227,9 +229,9 @@ export const OfferRide = () => {
     return (
       <section className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
         <div className="container mx-auto px-4 py-24">
-          <Button variant="ghost" className="mb-6" onClick={resetRide}>
-            <ChevronLeft className="h-4 w-4" />
-            Offer another ride
+          <Button variant="ghost" className="mb-6" onClick={() => navigate("/choose-mode")}>
+            <ChevronLeft className="h-4 w-4 mr-2" />
+            Back to Choose Mode
           </Button>
           <Card className="max-w-3xl mx-auto border-2 border-success/30 shadow-xl">
             <CardHeader className="space-y-2 text-center">
@@ -295,12 +297,10 @@ export const OfferRide = () => {
       <div className="container mx-auto px-4 py-24">
         <div className="max-w-3xl mx-auto">
           <div className="mb-6 flex items-center gap-2 text-sm text-muted-foreground">
-            {step > 0 ? (
-              <Button variant="ghost" size="sm" onClick={handleBack}>
-                <ChevronLeft className="h-4 w-4" />
-                Back
-              </Button>
-            ) : null}
+            <Button variant="ghost" size="sm" onClick={() => navigate("/choose-mode")}>
+              <ChevronLeft className="h-4 w-4 mr-2" />
+              Back
+            </Button>
             <span className="uppercase tracking-wide text-xs">Offer a ride</span>
           </div>
 

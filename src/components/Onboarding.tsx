@@ -69,6 +69,8 @@ export const Onboarding = () => {
     });
   };
 
+  // Onboarding is now handled via route-based SignUp page
+  // This component only shows if user hasn't onboarded and tries to access protected routes
   if (loading || hasOnboarded) {
     return null;
   }
