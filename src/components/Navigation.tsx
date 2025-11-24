@@ -1,14 +1,11 @@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useUser } from "@/context/UserContext";
-import { useChat } from "@/context/ChatContext";
-import { Car, MessageCircle } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Car } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const Navigation = () => {
   const { profile, resetOnboarding, loading } = useUser();
-  const { openOverlay } = useChat();
-  const location = useLocation();
 
   const initials =
     profile?.displayName
@@ -39,34 +36,13 @@ export const Navigation = () => {
             </Link>
 
             {/* Navigation Links - Centered */}
-            <div className="hidden md:flex items-center gap-6 absolute left-1/2 -translate-x-1/2">
-              {profile && (
-                <>
-                  <Link to="/rides" className="rounded-md px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary">
-                    Discover rides
-                  </Link>
-                  <Link to="/offer" className="rounded-md px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary">
-                    Offer a ride
-                  </Link>
-                  <button
-                    type="button"
-                    onClick={() => openOverlay(location.pathname + location.search)}
-                    className="flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
-                  >
-                    <MessageCircle className="h-4 w-4" />
-                    Chat
-                  </button>
-                </>
-              )}
-              <a href="#features" className="rounded-md px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary">
-                Features
-              </a>
-              <a href="#how-it-works" className="rounded-md px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary">
-                How It Works
-              </a>
-              <a href="#about" className="rounded-md px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary">
-                About
-              </a>
+            <div className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
+              <Link to="/rides" className="rounded-md px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary">
+                Discover rides
+              </Link>
+              <Link to="/offer" className="rounded-md px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary">
+                Offer a ride
+              </Link>
             </div>
 
             {/* User identity / CTA - Right aligned */}

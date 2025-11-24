@@ -18,8 +18,8 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <Onboarding />
       <BrowserRouter>
+        <Onboarding />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/signup" element={<SignUp />} />

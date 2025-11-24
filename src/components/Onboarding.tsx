@@ -1,4 +1,5 @@
 import { FormEvent, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import { useUser } from "@/context/UserContext";
 import { cn } from "@/lib/utils";
@@ -23,6 +24,7 @@ const companyLabelByValue = COMPANIES.reduce<Record<string, string>>((acc, compa
 
 export const Onboarding = () => {
   const { hasOnboarded, loading, completeOnboarding } = useUser();
+  const location = useLocation();
   const [displayName, setDisplayName] = useState("");
   const [company, setCompany] = useState<string>();
   const [error, setError] = useState<string | null>(null);
@@ -71,7 +73,14 @@ export const Onboarding = () => {
 
   // Onboarding is now handled via route-based SignUp page
   // This component only shows if user hasn't onboarded and tries to access protected routes
+  // Always allow access to landing page and signup page - don't block them
   if (loading || hasOnboarded) {
+    return null;
+  }
+  
+  // Don't show onboarding overlay on public pages - let users access them freely
+  const publicRoutes = ["/", "/signup"];
+  if (publicRoutes.includes(location.pathname)) {
     return null;
   }
 
