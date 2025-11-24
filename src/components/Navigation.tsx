@@ -2,10 +2,16 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useUser } from "@/context/UserContext";
 import { Car } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Navigation = () => {
   const { profile, resetOnboarding, loading } = useUser();
+  const navigate = useNavigate();
+  
+  const handleSwitchProfile = () => {
+    resetOnboarding();
+    navigate("/signup");
+  };
 
   const initials =
     profile?.displayName
@@ -57,14 +63,14 @@ export const Navigation = () => {
                       {profile.company ?? "Guest"}
                     </span>
                   </div>
-                  <Avatar className="h-9 w-9 border border-border/70 bg-muted/70">
-                    <AvatarFallback className="text-xs font-semibold">{initials}</AvatarFallback>
-                  </Avatar>
-                  {!profile.isGuest && (
-                    <Button variant="outline" size="sm" className="text-xs sm:text-sm" onClick={resetOnboarding} disabled={loading}>
-                      Switch profile
-                    </Button>
-                  )}
+                  <Link to="/signup" className="cursor-pointer">
+                    <Avatar className="h-9 w-9 border border-border/70 bg-muted/70">
+                      <AvatarFallback className="text-xs font-semibold">{initials}</AvatarFallback>
+                    </Avatar>
+                  </Link>
+                  <Button variant="outline" size="sm" className="text-xs sm:text-sm" onClick={handleSwitchProfile} disabled={loading}>
+                    Switch profile
+                  </Button>
                 </>
               ) : (
                 <Button variant="hero" size="sm" asChild>
