@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft, Search, SteeringWheel } from "lucide-react";
+import { ChevronLeft, Search, Car } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
@@ -65,7 +65,7 @@ export const ChooseMode = () => {
               >
                 <CardHeader className="space-y-4">
                   <div className="w-16 h-16 rounded-2xl bg-amber-100 flex items-center justify-center group-hover:bg-amber-200 transition-colors">
-                    <SteeringWheel className="w-8 h-8 text-amber-600" />
+                    <Car className="w-8 h-8 text-amber-600" />
                   </div>
                   <CardTitle className="text-2xl">Offer a Ride</CardTitle>
                   <CardDescription className="text-base">
@@ -86,4 +86,6 @@ export const ChooseMode = () => {
     </div>
   );
 };
+
+export default ChooseMode;
 
