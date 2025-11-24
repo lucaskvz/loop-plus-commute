@@ -29,20 +29,17 @@ export const Navigation = () => {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2 flex-shrink-0">
               <div className="w-10 h-10 rounded-xl bg-gradient-primary flex items-center justify-center shadow-primary">
                 <Car className="w-6 h-6 text-primary-foreground" />
               </div>
-              <div>
-                <h1 className="text-xl font-bold">
-                  Loop<span className="text-primary">+</span>
-                </h1>
-                <p className="text-xs text-muted-foreground leading-none">by Renault</p>
-              </div>
+              <h1 className="text-xl font-bold">
+                Loop<span className="text-primary">+</span>
+              </h1>
             </Link>
 
-            {/* Navigation Links */}
-            <div className="hidden md:flex items-center gap-4">
+            {/* Navigation Links - Centered */}
+            <div className="hidden md:flex items-center gap-6 absolute left-1/2 -translate-x-1/2">
               {profile && (
                 <>
                   <Link to="/rides" className="rounded-md px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary">
@@ -72,8 +69,8 @@ export const Navigation = () => {
               </a>
             </div>
 
-            {/* User identity / CTA */}
-            <div className="flex items-center gap-3">
+            {/* User identity / CTA - Right aligned */}
+            <div className="flex items-center gap-3 flex-shrink-0">
               {profile ? (
                 <>
                   <div className="hidden sm:flex flex-col items-end">
@@ -81,15 +78,17 @@ export const Navigation = () => {
                       {profile.displayName}
                     </span>
                     <span className="text-xs text-muted-foreground">
-                      {profile.company ?? "Guest access"}
+                      {profile.company ?? "Guest"}
                     </span>
                   </div>
                   <Avatar className="h-9 w-9 border border-border/70 bg-muted/70">
                     <AvatarFallback className="text-xs font-semibold">{initials}</AvatarFallback>
                   </Avatar>
-                  <Button variant="outline" size="sm" className="text-xs sm:text-sm" onClick={resetOnboarding} disabled={loading}>
-                    Switch profile
-                  </Button>
+                  {!profile.isGuest && (
+                    <Button variant="outline" size="sm" className="text-xs sm:text-sm" onClick={resetOnboarding} disabled={loading}>
+                      Switch profile
+                    </Button>
+                  )}
                 </>
               ) : (
                 <Button variant="hero" size="sm" asChild>
